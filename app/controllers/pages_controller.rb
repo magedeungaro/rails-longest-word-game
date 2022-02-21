@@ -4,13 +4,27 @@ class PagesController < ApplicationController
   end
 
   def score
+    # {
+      # "longest_word"=>"",
+      # "authenticity_token"=>"jnWqVi3yjew6l0dStdb8-Lk27iAEUz-N5ZfZu3bzKZThGNO4d1Tp8BHb9TvlM3_SGlXTu46sKja7I_5KrYsAMg",
+      # "start_time"=>"2022-02-21 13:27:17 -0300",
+      # "controller"=>"pages",
+      # "action"=>"score",
+      # "grid"=>"a s n g f o n t e l"
+    # }
+
+    grid = params[:grid].split(' ')
+    start_time = Time.new(params[:start_time])
+    end_time = Time.now
+    @guess = params[:longest_word]
+    @result = run_game(@guess, grid, start_time, end_time)
   end
 
   private
 
   def generate_grid(grid_size)
     # TODO: generate random grid of letters
-    letters = ('a'..'z').to_a
+    letters = ('A'..'Z').to_a
     grid = Array.new(grid_size)
 
     grid.map { letters.sample }
@@ -19,14 +33,14 @@ class PagesController < ApplicationController
   def run_game(attempt, grid, start_time, end_time)
     # TODO: runs the game and return detailed hash of result (with `:score`, `:message` and `:time` keys)
     time_elapsed = end_time - start_time
-    result = { score: 0, message: 'well done', time: time_elapsed }
+    result = { score: 0, message: 'Congratulations!', time: time_elapsed }
     attempt.upcase!
     valid = valid?(attempt, grid)
     english = english?(attempt)
 
-    result[:message] = 'not in the grid' unless valid
-    result[:message] = 'not an english word' unless english
-    result[:score] = score(attempt, time_elapsed) if valid && english
+    result[:message] = 'Your guess is not a valid word' unless valid
+    result[:message] = 'Your guess is not an english word' unless english
+    result[:score] = result(attempt, time_elapsed) if valid && english
     result
   end
 
@@ -69,7 +83,7 @@ class PagesController < ApplicationController
     in_grid?(word, grid) && !overused?(word, grid)
   end
 
-  def score(word, time_elapsed)
-    ((word.length * 100) - time_elapsed).to_i
+  def result(word, time_elapsed)
+    ((word.length * 1_000) - (time_elapsed.to_i / 60_000))
   end
 end

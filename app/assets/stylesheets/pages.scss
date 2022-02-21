@@ -13,6 +13,34 @@
   padding: 2.5px 7.5px;
 }
 
+.p-10{
+  padding: 2.5px 5px;
+}
+
+.p-sq-5{
+  padding: 5px;
+}
+
+.my-5{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 .fs-2{
   font-size: 2rem;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  transition: .5s;
+  text-decoration: none;
+}
+
+.btn:hover{
+  background-color: #084aad;
+}
+
+.rounded{
+  border-radius: 2.5px;
 }
