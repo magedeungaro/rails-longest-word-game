@@ -1,14 +1,13 @@
 <h1>Longest Word Game</h1>
 
-<% @letters.each do |letter| %>
+<% @new_game.grid.each do |letter| %>
   <span class="bg-primary text-white p-5 fs-2 rounded"><%= letter %></span>
 <% end %>
 
 <form action="/score" method="post" class="my-5">
-  <label for="longest_word"></label>
-  <input type="text" name="longest_word" id="longest_word" class="p-10">
+  <label for="attempt"></label>
+  <input type="text" name="attempt" id="attempt" class="p-10">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <%= hidden_field_tag :start_time, Time.now %>
-  <%= hidden_field_tag :grid, @letters %>
+  <%= hidden_field_tag :game_id, @new_game.id %>
   <input type="submit" value="Guess" class="bg-primary p-sq-5 text-white btn rounded">
 </form>

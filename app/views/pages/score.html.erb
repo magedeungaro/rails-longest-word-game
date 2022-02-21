@@ -1,5 +1,5 @@
 <h1>Result</h1>
-<p>Guess: <%= @guess %></p>
-<p>Result: <%= @result[:message] %></p>
-<p>Score: <%= @result[:score] %></p>
+<p>Guess: <%= @game.attempt %></p>
+<p>Result: <%= @game.end_message %></p>
+<p>Score: <%= @game.score %></p>
 <%= link_to "Play again", root_path, class: 'bg-primary p-sq-5 text-white btn rounded' %>
