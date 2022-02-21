@@ -4,15 +4,6 @@ class PagesController < ApplicationController
   end
 
   def score
-    # {
-      # "longest_word"=>"",
-      # "authenticity_token"=>"jnWqVi3yjew6l0dStdb8-Lk27iAEUz-N5ZfZu3bzKZThGNO4d1Tp8BHb9TvlM3_SGlXTu46sKja7I_5KrYsAMg",
-      # "start_time"=>"2022-02-21 13:27:17 -0300",
-      # "controller"=>"pages",
-      # "action"=>"score",
-      # "grid"=>"a s n g f o n t e l"
-    # }
-
     grid = params[:grid].split(' ')
     start_time = Time.new(params[:start_time])
     end_time = Time.now
